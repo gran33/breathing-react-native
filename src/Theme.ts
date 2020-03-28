@@ -2,7 +2,7 @@ import {ThemeManager, Colors, Typography} from 'react-native-ui-lib';
 
 export function loadTheme() {
   Colors.loadColors({
-    primaryColor: '#098b7b',
+    primaryColor: Colors.black,
     secondaryColor: '#969cab',
     backgroundColor: '#f7f7f7',
   });
@@ -16,11 +16,6 @@ export function loadTheme() {
     bodyMedium: {fontSize: 20, fontWeight: '400'},
   });
 
-  ThemeManager.setComponentTheme('Card', {
-    containerStyle: {
-      shadowColor: Colors.primaryColor
-    }
-  });
 
   ThemeManager.setComponentTheme('Text', {
     color: Colors.primaryColor,

@@ -20,8 +20,7 @@ export function launch() {
             }
           }]
         }
-      },
-
+      }
     });
   });
 }
