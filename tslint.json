@@ -1,0 +1,30 @@
+{
+  "extends": [
+    "tslint-react"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "**/*.json", "**/*.js"
+    ]
+  },
+  "rules": {
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "ter-indent": [ true, 2, { "SwitchCase": 1 }],
+    "jsx-boolean-value": ["never"],
+    "jsx-no-multiline-js": ["none"],
+    "jsx-no-lambda": false,
+    "jsx-self-close": true,
+    "max-line-length": [true, 200],
+    "no-console": [false],
+    "no-duplicate-switch-case": true,
+    "no-invalid-this": false,
+    "only-arrow-functions": false,
+    "no-unused-variable": true,
+    "semicolon": [true, "always", "ignore-bound-class-methods"],
+    "prefer-const": [true, {"destructuring": "all"}],
+    "no-empty": [
+      true,
+      "allow-empty-functions"
+    ]
+  }
+}
