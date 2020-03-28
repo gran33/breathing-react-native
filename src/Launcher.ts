@@ -13,7 +13,7 @@ export function launch() {
               options: {
                 topBar: {
                   title: {
-                    text: getString('')
+                    text: getString('HOME_SCREEN_TITLE')
                   }
                 }
               }
