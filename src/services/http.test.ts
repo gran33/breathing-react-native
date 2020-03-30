@@ -1,4 +1,4 @@
-describe('http', () => {
+xdescribe('http', () => {
   let http: any;
   let mockFetch: any;
   const fakeUrl = 'http://url.com';
