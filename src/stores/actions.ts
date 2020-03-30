@@ -1,7 +1,9 @@
-import {fetchDevices} from '../services/devices';
+import Checklist from '../services/checklist';
 import {store} from './store';
 
 export async function getDevices(): Promise<void> {
-  store.setDevices(await fetchDevices());
+  await Checklist.getCheckList();
+  const data = Checklist.data;
+  store.setDevices(data);
 }
 

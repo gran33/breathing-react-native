@@ -3,7 +3,7 @@ import * as remx from 'remx';
 
 interface State {
   loading: boolean;
-  devices: string[];
+  devices: Device[];
 }
 
 const initialState: State = {
@@ -13,20 +13,21 @@ const initialState: State = {
 
 const getDefaultState = () => _.cloneDeep(initialState);
 
-let state = remx.state(getDefaultState());
+const state = remx.state(getDefaultState());
 
 const setters = remx.setters({
-  setLoading: (isLoading: boolean) => {
+  setLoading: (isLoading: boolean): void => {
     state.loading = isLoading;
   },
-  setDevices: (devices: string[]) => {
+  setDevices: (devices: Device[]): void => {
     state.devices = devices;
   }
 });
 
 const getters = remx.getters({
-  isLoading: () => state.loading,
-  getDevices: () => state.devices
+  isLoading: (): boolean => state.loading,
+  getDevices: (): Device[] => state.devices,
+  getDeviceNames: (): string[] => _.map(getters.getDevices(), 'name')
 });
 
-export const store = {...setters, ...getters, initialState}
+export const store = {...setters, ...getters, initialState};

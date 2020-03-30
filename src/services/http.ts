@@ -1,69 +1,27 @@
-import _ from 'lodash';
+import axios from 'axios';
 
-export enum HttpMethods {
-  POST = 'POST',
-  GET = 'GET',
-  PUT = 'PUT'
-}
+const BASE_URL = 'https://www.noshmim.app/';
+const FUNCTIONS = '/_functions';
+const UrlBuilder = {
+  Checklist: `${FUNCTIONS}/checklist`,
+};
 
-interface FetchInterface {
-  method: HttpMethods;
-  url: string;
-  extraHeaders?: any;
-  body?: any;
-  queryParamsObject?: any;
-  avoidJsonParse?: boolean;
-}
-
-export async function get(url: string, extraHeaders?: object): Promise<any> {
-  return await performFetch({method: HttpMethods.GET, url, extraHeaders});
-}
-
-export async function getWithoutParse(url: string, extraHeaders?: object): Promise<any> {
-  return await performFetch({method: HttpMethods.GET, url, extraHeaders, avoidJsonParse: true});
-}
-
-export async function getWithParams(url: string, queryParams: object, extraHeaders?: object): Promise<any> {
-  return await performFetch({method: HttpMethods.GET, url, extraHeaders, queryParamsObject: queryParams});
-}
-
-export async function post(url: string, extraHeaders: object, body: object): Promise<any> {
-  return await performFetch({method: HttpMethods.POST, url, extraHeaders, body});
-}
-
-export async function put(url: string, extraHeaders: object, body: object): Promise<object> {
-  return await performFetch({method: HttpMethods.PUT, url, extraHeaders, body});
-}
-
-async function performFetch(fetchObject: FetchInterface): Promise<object> {
-  const headers = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
-  };
-
-  const response = await fetch(fetchObject.url, {
-    method: fetchObject.method,
-    headers: _.merge(headers, fetchObject.extraHeaders),
-    body: JSON.stringify(fetchObject.body)
+const HttpService = (baseURL: string) => {
+  const axiosInstance = axios.create({
+    baseURL,
+    headers: {'Content-Type': 'application/json' }
   });
 
-  if (fetchObject.avoidJsonParse) {
-    return response;
-  }
+  const getCheckList = async () => {
+    const {data} = await axiosInstance.get(UrlBuilder.Checklist);
+    return data.items;
+  };
 
-  if (!response.ok) {
-    throw new HttpError(`failed for ${fetchObject.url}, status ${response.status}`, response.status);
-  }
 
-  return await response.json();
-}
+  return {
+    getCheckList,
+  };
+};
 
-export class HttpError extends Error {
-  status: string;
 
-  constructor(message: any, status: any) {
-    super(message);
-    this.name = this.constructor.name;
-    this.status = status;
-  }
-}
+export default HttpService(BASE_URL);

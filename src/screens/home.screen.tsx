@@ -28,7 +28,7 @@ class HomeScreen extends Component {
 
   renderItem = ({item}: {item: object}): object => {
     return (
-      <View flex>
+      <View flex bg-red30>
         <Card marginH-30 marginB-20 enableShadow>
           <Card.Image height={120} imageSource={{uri: 'https://images.unsplash.com/photo-1524401352324-73cdbc09acd7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400'}}/>
           <View>
@@ -56,7 +56,7 @@ class HomeScreen extends Component {
 
 function mapStateToProps(): any {
   return {
-    devices: store.getDevices()
+    devices: store.getDeviceNames()
   };
 }
 
